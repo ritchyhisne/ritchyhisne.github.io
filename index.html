@@ -13,23 +13,29 @@
       --line:rgba(255,255,255,.12);
       --accent:#4ea1ff;
       --accent2:#7c5cff;
+      --card: rgba(255,255,255,.03);
+      --card2: rgba(255,255,255,.02);
+      --shadow: 0 18px 55px rgba(0,0,0,.35);
     }
     *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,.28), transparent 55%),
-                  radial-gradient(900px 650px at 85% 15%, rgba(78,161,255,.22), transparent 55%),
-                  linear-gradient(180deg, var(--bg), #060914 70%);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,.28), transparent 55%),
+        radial-gradient(900px 650px at 85% 15%, rgba(78,161,255,.22), transparent 55%),
+        linear-gradient(180deg, var(--bg), #060914 70%);
       color:var(--text);
     }
     a{ color:var(--accent); text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width:1000px; margin:0 auto; padding:42px 18px 70px; }
+    .wrap{ max-width:1020px; margin:0 auto; padding:46px 18px 70px; }
+
     .top{
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
       border-radius:22px;
       padding:22px;
       display:flex;
@@ -37,11 +43,39 @@
       justify-content:space-between;
       flex-wrap:wrap;
       align-items:flex-start;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
-    .name h1{ margin:0; font-size:40px; letter-spacing:.2px; }
-    .name .sub{ margin:8px 0 0; color:var(--muted); line-height:1.5; }
-    .chips{ margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; }
+    .top:before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width:320px;
+      height:320px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(78,161,255,.35), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(124,92,255,.28), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(2px);
+    }
+
+    .name{ z-index:1; }
+    .name h1{ margin:0; font-size:40px; letter-spacing:.2px; line-height:1.05; }
+    .sub{ margin:10px 0 0; color:var(--muted); line-height:1.55; font-size:14px; }
+    .contactline{
+      margin-top:8px;
+      font-size:13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      opacity:.95;
+    }
+    .dot{ color:rgba(255,255,255,.35); }
+
+    .chips{ margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; }
     .chip{
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
@@ -50,62 +84,77 @@
       font-size:13px;
       color:#e9ecff;
     }
-    .actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+
+    .actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; z-index:1; }
     .btn{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:10px 12px;
       border-radius:12px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
       color:var(--text);
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.2px;
+      white-space:nowrap;
     }
     .btn.primary{
-      border-color: rgba(78,161,255,.5);
+      border-color: rgba(78,161,255,.55);
       background: linear-gradient(90deg, rgba(78,161,255,.35), rgba(124,92,255,.35));
     }
-    .btn:hover{ filter:brightness(1.05); text-decoration:none; }
+    .btn:hover{ filter:brightness(1.07); text-decoration:none; }
 
     nav{
       margin-top:16px;
       display:flex;
       flex-wrap:wrap;
-      gap:12px;
-      padding:12px 4px 0;
+      gap:10px;
+      padding:12px 2px 0;
     }
     nav a{
       color:#e9ecff;
-      font-weight:800;
+      font-weight:900;
       opacity:.9;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
     }
-    nav a:hover{ opacity:1; }
+    nav a:hover{
+      opacity:1;
+      border-color: var(--line);
+      background: rgba(255,255,255,.02);
+      text-decoration:none;
+    }
 
     section{ margin-top:34px; }
     h2{
       margin:0 0 14px;
-      font-size:18px;
-      letter-spacing:.3px;
+      font-size:13px;
+      letter-spacing:.32em;
       text-transform:uppercase;
       color:#e9ecff;
+      opacity:.95;
     }
 
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
-    @media (max-width: 860px){ .grid2{ grid-template-columns: 1fr; } }
+    .grid2{ display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; }
+    @media (max-width: 900px){ .grid2{ grid-template-columns: 1fr; } }
 
     .card{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: var(--card);
       border-radius:18px;
       padding:16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.22);
     }
-    .card.soft{ background: rgba(255,255,255,.02); }
+    .card.soft{ background: var(--card2); }
     .card h3{ margin:0 0 8px; font-size:16px; }
-    .meta{ color:var(--muted); font-size:13px; line-height:1.4; margin-top:4px; }
-    p{ margin:10px 0 0; color:#edf0ff; line-height:1.65; }
-    ul{ margin:10px 0 0 18px; }
-    li{ margin:7px 0; color:#edf0ff; line-height:1.55; }
+    .meta{ color:var(--muted); font-size:13px; line-height:1.45; margin-top:4px; }
+
+    p{ margin:10px 0 0; color:#edf0ff; line-height:1.7; }
+    ul{ margin:10px 0 0 18px; padding:0; }
+    li{ margin:8px 0; color:#edf0ff; line-height:1.6; }
     .muted{ color:var(--muted); }
+    .line{ height:1px; background:var(--line); margin:14px 0; }
+
     .kvs{ display:grid; gap:10px; }
     .kv{
       border:1px solid var(--line);
@@ -113,7 +162,36 @@
       border-radius:16px;
       padding:14px;
     }
-    .kv b{ display:block; margin-bottom:6px; }
+    .kv b{ display:block; margin-bottom:6px; letter-spacing:.2px; }
+
+    .media{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      background: rgba(0,0,0,.25);
+    }
+    .media .media-inner{
+      display:flex;
+      justify-content:center;
+      padding:12px;
+      background: rgba(255,255,255,.02);
+    }
+    .media video{
+      width:100%;
+      max-width:560px;
+      border-radius:14px;
+      display:block;
+    }
+    .caption{
+      padding:10px 12px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      border-top:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      text-align:center;
+    }
 
     footer{
       margin-top:44px;
@@ -123,7 +201,6 @@
       font-size:13px;
       text-align:center;
     }
-    .line{ height:1px; background:var(--line); margin:14px 0; }
   </style>
 </head>
 
@@ -134,9 +211,11 @@
         <h1>Ritchy Hisne</h1>
         <div class="sub">
           Mechanical Engineering Student • Florida Atlantic University • Boca Raton, FL
-          <div style="margin-top:8px; font-size:13px;">
-            <a href="mailto:Rhisne2025@fau.edu">Rhisne2025@fau.edu</a> •
-            <a href="tel:+15616957640">(561) 695-7640</a> •
+          <div class="contactline">
+            <a href="mailto:Rhisne2025@fau.edu">Rhisne2025@fau.edu</a>
+            <span class="dot">•</span>
+            <a href="tel:+15616957640">(561)-695-7640</a>
+            <span class="dot">•</span>
             <a href="https://www.linkedin.com/in/ritchyhisne-hrmi" target="_blank" rel="noreferrer">linkedin.com/in/ritchyhisne-hrmi</a>
           </div>
         </div>
@@ -175,7 +254,7 @@
       <h2>About</h2>
       <div class="grid2">
         <div class="card">
-          <h3>Professional Summary</h3>
+          <h3>Mechanical Engineering Background</h3>
           <p>
             Mechanical Engineering student focused on design, analysis, and hands-on engineering projects.
             I connect engineering fundamentals to real systems using CAD, simulation, and experimental validation.
@@ -206,7 +285,7 @@
         <div class="meta">B.S. Mechanical Engineering • Expected May 2027 • GPA: 3.78</div>
 
         <div class="line"></div>
-        <div class="meta"><b>Relevant Coursework completed/in progress(ip) </b></div>
+        <div class="meta"><b>Relevant Coursework completed/in progress(ip)</b></div>
         <p class="muted">
           Statics, Strength of Materials, Engineering Graphics, Probability &amp; Statistics for Engineering,
           Computer Applications in Engineering I &amp; II, Dynamics, Engineering Materials, Thermodynamics,
@@ -224,19 +303,15 @@
       <div class="card">
         <h3>Academic Recognition</h3>
         <ul>
-          PALM BEACH STATE COLLEGE</li>
-
+          <li><b>PALM BEACH STATE COLLEGE</b></li>
           <li>President’s List — Fall 2022</li>
           <li>President’s List — Spring 2023</li>
           <li>President’s List — Fall 2023</li>
           <li>President’s List — Spring 2024</li>
-          <li>Summa Cum Laude, Dec 16, 2024</li>
-
-          FLORIDA ATLANTIC UNIVERSITY</li>
-
+          <li>Associate in Arts — Palm Beach State College Summa Cum Laude, Dec 16, 2024</li>
+          <li><b>FLORIDA ATLANTIC UNIVERSITY</b></li>
           <li>Dean’s List — Fall 2024</li>
           <li>Dean’s List — Spring 2025</li>
-          
         </ul>
       </div>
     </section>
@@ -277,16 +352,26 @@
           <li>Analyzed how increased intake pressure changes air density, combustion pressure, and power potential.</li>
           <li>Summarized tradeoffs between boosted and naturally aspirated performance using first-law energy principles.</li>
         </ul>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="https://raw.githubusercontent.com/ritchyhisne/ritchyhisne.github.io/main/thermo_presentation.pdf" target="_blank" class="btn primary">View Presentation (PDF)</a>
+          <a href="https://raw.githubusercontent.com/ritchyhisne/ritchyhisne.github.io/main/thermo_presentation.pdf" download class="btn">Download PDF</a>
+        </div>
       </div>
-<div style="margin-top:18px;">
-  <a href="turbo_vs_na_engine_analysis.pdf" target="_blank" class="btn primary">View Presentation (PDF)</a>
-  <a href="turbo_vs_na_engine_analysis.pdf" download class="btn">Download PDF</a>
-</div>
-
 
       <div class="card" style="margin-top:14px;">
         <h3>Piston–Crank System Kinematic Analysis</h3>
         <div class="meta">Oct 2025</div>
+
+        <div class="media">
+          <div class="media-inner">
+            <video controls>
+              <source src="piston%20crank.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="caption">Piston–crank mechanism motion study demonstrating displacement and velocity behavior</div>
+        </div>
+
         <ul>
           <li>Designed and studied a piston–crank mechanism to model constrained slider motion from a rotating crank.</li>
           <li>Computed slider displacement and velocity at discrete crank angles using relative velocity and instantaneous center methods.</li>
@@ -298,6 +383,17 @@
       <div class="card" style="margin-top:14px;">
         <h3>Pulley–Belt System Dynamics Analysis</h3>
         <div class="meta">Dec 2025</div>
+
+        <div class="media">
+          <div class="media-inner">
+            <video controls>
+              <source src="pulley%20belt.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="caption">Pulley–belt system motion study demonstrating angular velocity and acceleration behavior</div>
+        </div>
+
         <ul>
           <li>Created a SolidWorks motion study of a pulley–belt system to evaluate rotational kinematics and system behavior.</li>
           <li>Measured angular velocity and acceleration trends to understand power transmission and response under motion constraints.</li>
@@ -309,6 +405,15 @@
       <div class="card" style="margin-top:14px;">
         <h3>Arduino Smart Car (Autonomous Systems Project)</h3>
         <div class="meta">Mar 2025 – Apr 2025</div>
+
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn primary" href="https://www.youtube.com/watch?v=UAGWTxJbSV0" target="_blank" rel="noreferrer">Watch Arduino Car Video</a>
+        </div>
+
+        <a href="https://www.youtube.com/watch?v=UAGWTxJbSV0" target="_blank" rel="noreferrer" style="display:block; margin-top:14px; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+          <img src="https://img.youtube.com/vi/UAGWTxJbSV0/hqdefault.jpg" alt="Arduino Smart Car Video Thumbnail" style="width:100%; display:block;">
+        </a>
+
         <ul>
           <li>Built an Arduino-based smart car using IR sensors for line tracking and an ultrasonic sensor for obstacle detection.</li>
           <li>Implemented motor control using an L298N driver to coordinate dual DC motors for steering and speed control.</li>
@@ -333,7 +438,8 @@
       </div>
 
       <div class="card" style="margin-top:14px;">
-        <h3>Publix Super Markets — Part-Time Customer Service Cashier</h3>
+        <h3>Publix Super Markets — Part-Time Customer Service Cashier (Delray Beach, FL)</h3>
+       <div class="meta">April 2022 – Present</div>
         <div class="meta">Customer Service &amp; Store Operations</div>
         <ul>
           <li>Support daily store operations by assisting customers and maintaining clean, organized, and safe work areas.</li>
